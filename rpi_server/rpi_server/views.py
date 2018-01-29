@@ -1,8 +1,7 @@
 from photologue.models import Gallery
 
 from django.http import JsonResponse
-import json
-from settings import MEDIA_URL
+from .settings import MEDIA_URL
 
 
 def urljoin(*args):
