@@ -10,7 +10,8 @@ SECRET_KEY = '=_v6sfp8u2uuhdncdz9t1_nu8(#8q4=40$f$4rorj4q3)f-nlc'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["noticeboard.wncc-iitb.org",
+                 "127.0.0.1", "127.0.1.1", "139.59.21.125"]
 
 
 INSTALLED_APPS = (

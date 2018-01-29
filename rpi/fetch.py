@@ -3,7 +3,7 @@ import json
 import os
 
 
-BASEURL = 'http://localhost:8000'
+BASEURL = 'http://noticeboard.wncc-iitb.org/'
 BASE_DIR = 'Downloads/'
 
 
