@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}RPi TV Noticeboard{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="page-header">
+			  <h1>Welcome to the RPi TV Noticeboard project</h1>
+			</div>
+			<p>This website serves as a portal for the an RPi TV Noticeboard to fetch images from.</p>
+			<p>An RPi TV Noticeboard is a simple setup consisting of an RPi connected to a TV with HDMI. The RPi runs a script that periodically fetches images from the server.</p>
+			<p>To have a look at the genre-wise images uploaded currently, go <a href="{% url 'photologue:gallery-list' %}">here</a>.</p>
+			<p>The code for the project can be found <a href="">here on Github</a>.</p>
+		</div>
+	</div>
+{% endblock %}
