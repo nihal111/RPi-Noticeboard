@@ -14,6 +14,6 @@ The contents of this folder are to be copied to the RPi. There are 3 essential p
 3. SSH into the RPi.
 4. On the RPi, download the `rpi` folder. //Insert command
 5. On the RPi, execute `sudo apt-get install python-tk python-imaging python-imaging-tk x11-xserver-utils`
-6. On the RPi, execute `sudo crontab -e`. It might prompt you to choose a text editor. (Choose nano if you don't know what to do.) Add the following line at the bottom of the file- `* * * * * (python /home/pi/rpi/fetch.py) >> /home/pi/rpi/TV_log.txt 2>&1`. This would run our fetch script every minute and save all output in the TV_log file created inside `~/rpi`. 
+6. On the RPi, execute `sudo crontab -e`. It might prompt you to choose a text editor. (Choose nano if you don't know what to do.) Add the following line at the bottom of the file- `* * * * * (cd /home/pi/rpi/; python fetch.py) >> /home/pi/rpi/TV_log.txt 2>&1`. This would run our fetch script every minute and save all output in the TV_log file created inside `~/rpi`. 
 7. On the RPi, cd into the `rpi` folder and execute `chmod 755 launcher.sh`.
 8. On the RPi, execute `sudo nano /home/pi/.config/lxsession/LXDE-pi/autostart`. Add the following line to the bottom- `@sh /home/pi/rpi/launcher.sh`.
