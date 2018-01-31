@@ -1,6 +1,7 @@
 import urllib
 import json
 import os
+import datetime
 
 
 BASEURL = 'http://noticeboard.wncc-iitb.org/'
@@ -23,6 +24,9 @@ data = json.loads(response.read())
 online_list = []
 files_to_delete = []
 existing_files = []
+
+print
+print "Script running at- " + str(datetime.datetime.now())
 
 for g_index in data['galleries']:
     gallery = data['galleries'][g_index]
