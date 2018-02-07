@@ -11,6 +11,7 @@ from photologue.models import Gallery, Photo
 from django.db.models.signals import m2m_changed
 from django.core.exceptions import ValidationError
 
+from .models import PhotoExtended
 
 MAX_LIMIT = 3
 
@@ -20,7 +21,7 @@ class GalleryAdminForm(forms.ModelForm):
 
     class Meta:
         model = Gallery
-        exclude = ['date_added', 'sites',]
+        exclude = ['date_added', 'sites', ]
 
 
 class GalleryAdmin(GalleryAdminDefault):
@@ -38,7 +39,7 @@ class GalleryAdmin(GalleryAdminDefault):
             return qs
         return qs
         # TODO: add a m2m link between users and galleries and display
-        # only those galleries that are linked to the user. 
+        # only those galleries that are linked to the user.
         # qs.filter(users_allowed__in=[request.user])
 
 
@@ -50,8 +51,18 @@ class PhotoAdminForm(forms.ModelForm):
         exclude = ['date_added', 'effect', 'sites', 'is_public']
 
 
+class PhotoExtendedInline(admin.StackedInline):
+    model = PhotoExtended
+    can_delete = False
+
+
 class PhotoAdmin(PhotoAdminDefault):
     form = PhotoAdminForm
+    inlines = [PhotoExtendedInline, ]
+
+
+admin.site.unregister(Gallery)
+admin.site.register(Gallery, GalleryAdmin)
 
 
 admin.site.unregister(Gallery)
