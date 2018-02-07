@@ -3,3 +3,4 @@
 django_photologue.egg-info
 build
 rpi_server/db.sqlite3
+rpi/Downloads/*
