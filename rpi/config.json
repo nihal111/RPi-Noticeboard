@@ -1,22 +1,52 @@
-{  
-   "tickerspeed":[1,10],
-   "tilingpad":[2,2],
-   "delimiter":"         ",
-   "canvasbg":"white",
-   "picsatatime":1,
-   "refreshcount":{"1":10,"2":10,"4":10},
-   "picspeed":4000,
-   "directories":[
-      "Downloads/Academics",
-      "Downloads/Culturals",
-      "Downloads/Technical",
-      "Downloads/Miscellaneous",
-      "Downloads/Hostel-9",
-      "Downloads/Sports"
-   ],
-   "tickerpad":[0,2],
-   "tickerstyle":["white",["Helvectica","24"]],
-   "tickerrectcolor":"black",
-   "mainpad":[[1,1],[50,1]],
-   "logoscale":[200,40]
+{
+  "canvasbg": "white", 
+  "tilingpad": [
+    2, 
+    2
+  ], 
+  "picsatatime": 1, 
+  "directories": [
+    "Downloads/Miscellaneous", 
+    "Downloads/Sports", 
+    "Downloads/Academics", 
+    "Downloads/Culturals", 
+    "Downloads/Technical"
+  ], 
+  "delimiter": "         ", 
+  "tickerrectcolor": "black", 
+  "tickerspeed": [
+    1, 
+    10
+  ], 
+  "mainpad": [
+    [
+      1, 
+      1
+    ], 
+    [
+      50, 
+      1
+    ]
+  ], 
+  "refreshcount": {
+    "1": 10, 
+    "2": 10, 
+    "4": 10
+  }, 
+  "logoscale": [
+    200, 
+    40
+  ], 
+  "picspeed": 4000, 
+  "tickerstyle": [
+    "white", 
+    [
+      "Helvectica", 
+      "24"
+    ]
+  ], 
+  "tickerpad": [
+    0, 
+    2
+  ]
 }

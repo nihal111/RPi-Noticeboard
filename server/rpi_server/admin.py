@@ -20,7 +20,7 @@ class GalleryAdminForm(forms.ModelForm):
 
     class Meta:
         model = Gallery
-        exclude = ['date_added', 'sites', 'is_public']
+        exclude = ['date_added', 'sites',]
 
 
 class GalleryAdmin(GalleryAdminDefault):
