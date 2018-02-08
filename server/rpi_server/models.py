@@ -13,7 +13,8 @@ class PhotoExtended(models.Model):
     photo = models.OneToOneField(Photo, related_name='extended')
 
     # This is the important bit - where we add in the tags.
-    expiry_date = models.DateField(default=datetime.date.today)
+    expiry_date = models.DateField(default=datetime.date.today,
+                                   help_text="Photo will be deleted after this date")
 
     # Boilerplate code to make a prettier display in the admin interface.
     class Meta:

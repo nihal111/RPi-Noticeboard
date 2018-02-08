@@ -13,11 +13,16 @@ from django.core.exceptions import ValidationError
 
 from .models import PhotoExtended
 
-MAX_LIMIT = 3
+MAX_LIMIT = 15
 
 
 class GalleryAdminForm(forms.ModelForm):
     """Users never need to enter a description on a gallery."""
+
+    def __init__(self, *args, **kwargs):
+        super(GalleryAdminForm, self).__init__(*args, **kwargs)
+        self.fields['photos'].help_text = \
+            'IMPORTANT: Select a maximum of {} photos.'.format(str(MAX_LIMIT))
 
     class Meta:
         model = Gallery
@@ -48,7 +53,7 @@ class PhotoAdminForm(forms.ModelForm):
     """Users never need to enter a description on a gallery."""
 
     class Meta:
-        model = Photo
+        model = PhotoExtended
         exclude = ['date_added', 'effect', 'sites', 'is_public']
 
 
@@ -79,4 +84,4 @@ def regions_changed(sender, **kwargs):
 
 # Uncomment this line to put a cap of photos every gallery can contain
 # This cap is defined by MAX_LIMIT
-# m2m_changed.connect(regions_changed, sender=Gallery.photos.through)
+m2m_changed.connect(regions_changed, sender=Gallery.photos.through)
