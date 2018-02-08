@@ -11,7 +11,7 @@ import datetime
 # Where is the RPi set up.
 # If set to "h9" allows access to all private galleries that have title
 # starting with "h9"
-FROM = "h9"
+FROM = "hostel9"
 
 BASEURL = 'http://noticeboard.wncc-iitb.org/'
 BASE_DIR = 'Downloads/'
