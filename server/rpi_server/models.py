@@ -3,6 +3,8 @@ from django.db import models
 import datetime
 
 from photologue.models import Photo
+from django.dispatch import receiver
+from django.db.models.signals import post_delete
 
 
 class PhotoExtended(models.Model):
@@ -23,3 +25,9 @@ class PhotoExtended(models.Model):
 
     def admin_thumbnail(self):
         func = getattr(self, 'get_admin_thumbnail_url', None)
+
+
+@receiver(post_delete, sender=PhotoExtended)
+def post_delete_photo_extended(sender, instance, *args, **kwargs):
+    if instance.photo:  # just in case photo is not specified
+        instance.photo.delete()
