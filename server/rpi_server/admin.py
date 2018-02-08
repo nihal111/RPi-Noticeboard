@@ -37,7 +37,8 @@ class GalleryAdmin(GalleryAdminDefault):
         qs = super(GalleryAdmin, self).get_queryset(request)
         if request.user.is_superuser:
             return qs
-        return qs
+        else:
+            return qs.filter(title__iexact=request.user)
         # TODO: add a m2m link between users and galleries and display
         # only those galleries that are linked to the user.
         # qs.filter(users_allowed__in=[request.user])
@@ -76,4 +77,6 @@ def regions_changed(sender, **kwargs):
         raise ValidationError("You can't assign more than three regions")
 
 
-m2m_changed.connect(regions_changed, sender=Gallery.photos.through)
+# Uncomment this line to put a cap of photos every gallery can contain
+# This cap is defined by MAX_LIMIT
+# m2m_changed.connect(regions_changed, sender=Gallery.photos.through)
