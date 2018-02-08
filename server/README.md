@@ -2,34 +2,31 @@
 
 ### About
 
-This project is a fork of the django-photologue example project that can be found [here](https://github.com/jdriscoll/django-photologue).
+This project is based on the [django-photologue example project](https://github.com/jdriscoll/django-photologue) with a few modifications.
 
 ### Usage
 
-```
-<VirtualHost *:80>
-    ServerName www.noticeboard.wncc-iitb.org
-    ServerAlias noticeboard.wncc-iitb.org
-    #DocumentRoot /var/www/notceboard.wncc-iitb.org/public_html
-    ErrorLog /var/www/noticeboard.wncc-iitb.org/error.log
-    CustomLog /var/www/noticeboard.wncc-iitb.org/requests.log combined
-
-    Alias /static /var/www/noticeboard.wncc-iitb.org/rpi_server/static
-
-    <Directory /var/www/noticeboard.wncc-iitb.org/rpi_server/static>
-        Require all granted
-    </Directory>
-
-    <Directory /var/www/noticeboard.wncc-iitb.org/rpi_server>
-        <Files wsgi.py>
-            Require all granted
-        </Files>
-    </Directory>
+1. Clone this repository inside a folder on the server.
+2. Configure a virtual host to get it up and running. A guide like [this](https://www.digitalocean.com/community/tutorials/how-to-serve-django-applications-with-apache-and-mod_wsgi-on-ubuntu-16-04) (Ubuntu) or [this](https://www.digitalocean.com/community/tutorials/how-to-serve-django-applications-with-apache-and-mod_wsgi-on-centos-7) (CentOS) might be handy.
+3. The repository is initialised with a few galleries, which should be visible if everything is set up properly.
+4. To reset the database, run `python manage.py flush` inside the `server` directory. You should create a superuser after this step using `python manage.py createsuperuser`
+5. Execute `sudo crontab -e` and add the following to it `0 0 * * * source /path/to/server/rpi_serverenv/bin/activate && python /path/to/server/manage.py cleanup >> /path/to/server/cronjob.log`. This would cleanup expired photos every midnight.
 
 
-    WSGIDaemonProcess wncc_noticeboard python-path=/var/www/noticeboard.wncc-iitb.org/rpi_server:/var/www/noticeboard.wncc-iitb.org/rpi_server/rpi_serverenv/lib/python2.7/site-packages
-    WSGIProcessGroup wncc_noticeboard
-    WSGIScriptAlias / /var/www/noticeboard.wncc-iitb.org/rpi_server/rpi_server/wsgi.py
+### Add photos
+1. To add photos, login to the admin portal- `https://noticeboard.wncc-iitb.org/admin` (Replace `noticeboard.wncc-iitb.org` with your domain)
+2. Head over to photos. Browse and find a photo, choose a title, caption (optional) and set an expiry date.
+Note: The expiry date is the date after which the photo will be automatically removed.
+3. Head over to the gallery you want to add the photo to, and select the photo by searching for the title you chose in step 2.
+4. Save and exit, the photo should now be available. If you face an error while saving, it might be because you've exceeded the MAX_LIMIT defined per gallery. A gallery can only contain MAX_LIMIT number of photos to prevent overuse.
 
-</VirtualHost>
-```
+
+### Fetch List
+
+The list of all galleries and the photos it contains can be found by performing a get request at-  
+`https://noticeboard.wncc-iitb.org/list?from=hostel9`
+(Replace `noticeboard.wncc-iitb.org` with your domain)
+
+The `from` parameter describes where the request is being made from. By default from is set to `generic`.
+Adding a `from` parameter allows access to private galleries that have title starting with `from`.
+In the example above the list produced would contain all public galleries and the Hostel9 private gallery as well.

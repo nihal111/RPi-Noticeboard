@@ -6,10 +6,12 @@ from django.views.generic import TemplateView
 
 from .views import json_list
 
+admin.site.site_header = 'RPi TV Noticeboard'
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^photologue/', include('photologue.urls')),
     url(r'^$', TemplateView.as_view(template_name="homepage.html"),
         name='homepage'),
-    url(r'^list/', json_list),
+    url(r'^list/', json_list, name='list'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

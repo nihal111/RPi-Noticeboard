@@ -17,7 +17,9 @@ def json_list(request):
     request_from = request.GET.get('from', 'generic')
     # Add all public galleries to queryset
     queryset = Gallery.objects.on_site().is_public()
+
     # Add all galleries that contain the `from` text.
+    # Use title__iexact for case insensitive matching (h1 does not get h15)
     queryset |= Gallery.objects.filter(title__startswith=request_from)
     response_data = {}
     response_data['from'] = request_from
